@@ -30,6 +30,157 @@
             overflow-x: hidden;
         }
 
+        /* NAVIGATION BAR */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(45, 52, 54, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--secondary);
+            text-decoration: none;
+            letter-spacing: -1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-menu a:hover::before {
+            width: 80%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(10px, -10px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: rgba(45, 52, 54, 0.99);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: slideDown 0.3s ease;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.75rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+        }
+
+        .mobile-menu a:hover {
+            border-left-color: var(--secondary);
+            color: var(--secondary);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
         /* HERO SECTION */
         .hero {
             height: 100vh;
@@ -39,6 +190,8 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+            margin-top: 70px;
+            padding-top: 70px;
         }
 
         .hero::before {
@@ -461,6 +614,34 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
+            .nav-logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero {
+                margin-top: 0;
+                padding-top: 0;
+                height: auto;
+                min-height: 100vh;
+                padding-top: 70px;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -469,12 +650,26 @@
                 font-size: 1.2rem;
             }
 
+            .hero-logo {
+                width: 200px;
+                height: 200px;
+            }
+
             .section-title {
                 font-size: 2rem;
             }
 
+            .about {
+                padding: 60px 20px;
+            }
+
             .about-content {
                 grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-text h2 {
+                font-size: 1.8rem;
             }
 
             .about-image {
@@ -482,18 +677,184 @@
                 font-size: 80px;
             }
 
+            .services {
+                padding: 60px 20px;
+            }
+
+            .services-grid {
+                gap: 25px;
+            }
+
+            .service-card {
+                padding: 25px;
+            }
+
+            .testimonials {
+                padding: 60px 20px;
+            }
+
+            .testimonials-grid {
+                gap: 25px;
+            }
+
+            .booking {
+                padding: 60px 20px;
+            }
+
+            .booking-content {
+                padding: 0;
+            }
+
+            .booking h2 {
+                font-size: 1.8rem;
+            }
+
+            .phone-number {
+                font-size: 1.5rem;
+            }
+
             .booking-buttons {
                 flex-direction: column;
+                gap: 15px;
             }
 
             .booking-button {
                 width: 100%;
                 justify-content: center;
+                padding: 12px 25px;
+            }
+
+            footer {
+                padding: 40px 20px 20px;
+            }
+
+            .footer-content {
+                gap: 30px;
+            }
+
+            .footer-section h3 {
+                font-size: 1.1rem;
+            }
+
+            .footer-section p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.75rem;
+            }
+
+            .nav-logo {
+                font-size: 1.1rem;
+            }
+
+            .mobile-menu {
+                padding: 1.5rem;
+            }
+
+            .mobile-menu a {
+                font-size: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1rem;
+            }
+
+            .hero-logo {
+                width: 150px;
+                height: 150px;
+                margin-bottom: 20px;
+            }
+
+            .cta-button {
+                padding: 12px 35px;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 40px;
+            }
+
+            .about-text h2 {
+                font-size: 1.5rem;
+            }
+
+            .about-text p {
+                font-size: 1rem;
+            }
+
+            .service-card .icon {
+                font-size: 2.5rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .service-card p {
+                font-size: 0.9rem;
+            }
+
+            .testimonial-text {
+                font-size: 0.95rem;
+            }
+
+            .testimonial-author {
+                font-size: 1rem;
+            }
+
+            .booking h2 {
+                font-size: 1.5rem;
+            }
+
+            .booking p {
+                font-size: 1rem;
+            }
+
+            .phone-number {
+                font-size: 1.3rem;
+                padding: 15px 30px;
+            }
+
+            .scroll-indicator {
+                bottom: 20px;
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">🍦 Sweet Escape</a>
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#booking">Book Now</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#about" onclick="closeMobileMenu()">About</a>
+            <a href="#services" onclick="closeMobileMenu()">Services</a>
+            <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
+            <a href="#booking" onclick="closeMobileMenu()">Book Now</a>
+        </div>
+    </nav>
+
     <!-- HERO SECTION -->
     <section class="hero" id="hero">
         <div class="hero-content">
@@ -631,5 +992,47 @@
             <p>&copy; 2026 Sweet Escape Waffles & Ice Cream Truck. All rights reserved. | Premium Dessert Catering</p>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        function closeMobileMenu() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        }
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = event.target.closest('nav');
+            if (!isClickInsideNav && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Change nav background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(45, 52, 54, 0.99)';
+                nav.style.boxShadow = '0 4px 25px rgba(0, 0, 0, 0.15)';
+            } else {
+                nav.style.background = 'rgba(45, 52, 54, 0.98)';
+                nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
 </body>
 </html>
