@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Escape - Premium Waffles & Ice Cream Truck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #FFE66D;
+            --dark: #2D3436;
+            --light: #F8F9FA;
+            --accent: #A29BFE;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="8" fill="white" opacity="0.1"/><circle cx="80" cy="80" r="12" fill="white" opacity="0.1"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, -30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-logo {
+            width: 280px;
+            height: 280px;
+            object-fit: contain;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            letter-spacing: -2px;
+        }
+
+        .hero .tagline {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            background: white;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: white;
+            font-size: 2rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            padding: 100px 40px;
+            background: var(--light);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '🍦';
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* SERVICES SECTION */
+        .services {
+            padding: 100px 40px;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--light);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* TESTIMONIALS SECTION */
+        .testimonials {
+            padding: 100px 40px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: white;
+        }
+
+        .testimonials .section-title {
+            color: white;
+        }
+
+        .testimonials .section-title::after {
+            background: linear-gradient(90deg, white, rgba(255,255,255,0.5));
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .stars {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            letter-spacing: 5px;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* BOOKING SECTION */
+        .booking {
+            padding: 100px 40px;
+            background: var(--light);
+            text-align: center;
+        }
+
+        .booking-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .booking h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .booking p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .phone-number {
+            display: inline-block;
+            font-size: 2rem;
+            color: var(--dark);
+            font-weight: 700;
+            margin: 30px 0;
+            padding: 20px 40px;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .booking-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .booking-button {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .booking-button.primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.3);
+        }
+
+        .booking-button.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,107,107,0.4);
+        }
+
+        .booking-button.secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .booking-button.secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 40px 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-section p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            opacity: 0.7;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 250px;
+                font-size: 80px;
+            }
+
+            .booking-buttons {
+                flex-direction: column;
+            }
+
+            .booking-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <img src="logo.jpg" alt="Sweet Escape Logo" class="hero-logo">
+            <h1>Sweet Escape</h1>
+            <p class="tagline">Premium Waffles & Ice Cream Truck</p>
+            <p style="font-size: 1.3rem; margin-bottom: 50px; opacity: 0.95;">Bringing Sweetness to Your Events</p>
+            <button class="cta-button" onclick="document.getElementById('booking').scrollIntoView();">Book Now</button>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <h2 class="section-title">About Us</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h2>What Makes Us Special?</h2>
+                <p>Sweet Escape is not your average ice cream truck. We're a premium mobile dessert experience that brings delicious indulgence right to your doorstep.</p>
+                <p>Serving the North Jersey, New York City and surrounding areas, we specialize in hot waffles with premium ice cream, loaded with your choice of toppings, decadent sundaes, refreshing shakes, and more.</p>
+                <p>Whether it's sundaes, shakes, pre-packaged novelties, cannolis, or tiramisu available upon request – we cater to all ages and all tastes.</p>
+            </div>
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="services" id="services">
+        <h2 class="section-title">What We Offer</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon">🧇</div>
+                <h3>Premium Waffles</h3>
+                <p>Hot, fresh waffles made to order, customized with your favorite toppings and ice cream flavors.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🍦</div>
+                <h3>Ice Cream Paradise</h3>
+                <p>Premium ice cream in a variety of flavors, perfectly paired with our gourmet waffles and toppings.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🍨</div>
+                <h3>Decadent Sundaes</h3>
+                <p>Lavish sundaes loaded with toppings, sauces, and whipped cream – pure indulgence in every bite.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🥤</div>
+                <h3>Creamy Shakes</h3>
+                <p>Thick, creamy milkshakes in classic and creative flavors to satisfy any craving.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🍫</div>
+                <h3>Specialty Desserts</h3>
+                <p>Cannolis, tiramisu, and other special treats available upon request – gourmet desserts on wheels.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🎉</div>
+                <h3>Event Catering</h3>
+                <p>Perfect for parties, corporate events, weddings, and celebrations – we make your events sweeter.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"The VERY BEST waffles everyone at my event loved her waffles and ice cream. Great owner great quality! I would recommend her to all my friends and family"</p>
+                <p class="testimonial-author">— Lourie Iudici</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"This was the best decision we made to bring the ice cream truck to my wife's 40th birthday party. The ladies were extremely nice and the food was awesome! Everyone loved it."</p>
+                <p class="testimonial-author">— Stephen Fiore</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Amazing service!! I was desperate to find a dessert option for 22 children for my daughter's party. Jennifer and her crew came in a clutch! She was so understanding and arrived even before her promised time! Highly recommend!"</p>
+                <p class="testimonial-author">— Christine Caraballo</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING SECTION -->
+    <section class="booking" id="booking">
+        <div class="booking-content">
+            <h2>Ready to Book Sweet Escape?</h2>
+            <p>Let us bring the sweetness to your next event! Whether it's a birthday party, corporate event, wedding, or any special occasion, our premium dessert truck will make it unforgettable.</p>
+            
+            <div class="phone-number">
+                <a href="tel:+19739307586" style="color: inherit; text-decoration: none;">(973) 930-7586</a>
+            </div>
+
+            <p style="font-size: 1rem; margin-top: 30px;">📍 <strong>Serving:</strong> North Jersey, New York City & Surrounding Areas</p>
+
+            <div class="booking-buttons">
+                <a href="tel:+19739307586" class="booking-button primary">
+                    📞 Call to Book
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100069694902049&ref=pro_upsell_xav_ig_profile_page_web" target="_blank" class="booking-button secondary">
+                    f Follow on Facebook
+                </a>
+                <a href="https://g.page/r/CfQjhOPJpuAnEBI/review" target="_blank" class="booking-button secondary">
+                    ⭐ Leave a Google Review
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sweet Escape</h3>
+                <p>Premium Waffles & Ice Cream Truck</p>
+                <p>Serving delicious memories, one waffle at a time.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📞 (973) 930-7586</p>
+                <p>📍 Woodland Park, NJ</p>
+                <p>Service Area: North Jersey, NYC & Surrounding</p>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100069694902049&ref=pro_upsell_xav_ig_profile_page_web" target="_blank" title="Facebook">f</a>
+                    <a href="https://g.page/r/CfQjhOPJpuAnEBI/review" target="_blank" title="Google">G</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sweet Escape Waffles & Ice Cream Truck. All rights reserved. | Premium Dessert Catering</p>
+        </div>
+    </footer>
+</body>
+</html>
